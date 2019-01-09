@@ -79,7 +79,7 @@ function addHoles(width, height, holesLevel, map) {
 }
 
 router.post('/', async (req, res) => {
-
+    req.setTimeout(500000);
     //Construction de la map
     const {width: width, height: height, maxDepth: maxDepth, seaLevel: seaLevel, dunesLevel: dunesLevel,
         holesLevel: holesLevel} = req.body;
