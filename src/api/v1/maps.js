@@ -1,5 +1,4 @@
 const express = require('express');
-const {BadRequest} = require('http-errors');
 const router = express.Router();
 
 // Get random int, min included max included
@@ -29,7 +28,7 @@ function addDunes(width, height, dunesLevel, map, depth) {
         let placed = 0;
         do {
             let rndCell = getRandomIntInclusive(0, wTimesH);
-            let rndHeight = getRandomIntInclusive(3, depth);
+            let rndHeight = getRandomIntInclusive(2, depth);
             if (map[0][rndCell] < 9 && map[0][rndCell] > 12 || map[0][rndCell] < 13) {
                 let centerPos = rndCell;
                 rndCell = rndCell - Math.trunc((rndHeight * 2 - 1) / 2) - width *
