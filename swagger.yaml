@@ -3,7 +3,7 @@ info:
   description: "API template"
   version: "0.0.0"
   title: "API template"
-host: "localhost:3000"
+host: "https://mars-map-generator.herokuapp.com/api/v1/maps"
 basePath: "/api/v1"
 produces:
   - "application/json"
