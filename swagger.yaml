@@ -46,7 +46,7 @@ paths:
                 example: 0.03
                 default: 0.03
                 description: \% of ice on the map.
-              duneslevel:
+              dunesLevel:
                 type: number
                 example: 0.01
                 default: 0.01
