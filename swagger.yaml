@@ -1,0 +1,57 @@
+swagger: "2.0"
+info:
+  description: "API template"
+  version: "0.0.0"
+  title: "API template"
+host: "localhost:3000"
+basePath: "/api/v1"
+produces:
+  - "application/json"
+securityDefinitions:
+  authorization:
+    type: apiKey
+    name: authorization
+    in: header
+paths:
+  /maps:
+    get:
+      tags:
+        - Maps
+      summary: Return a randomly generated isometric map
+      parameters:
+        - in: body
+          name: Map dimension
+          type: object
+          required: true
+          properties:
+            heigth:
+              type: integer
+            width:
+              type: integer
+      responses:
+        200:
+          description: Return a randomly generated isometric map
+        400:
+          description: The required properties are not sent correctly
+definitions:
+  Map:
+    type: object
+    properties:
+      cells:
+        type: array
+        items:
+          type: object
+          properties:
+            cell:
+              $ref: '#/definitions/Cell'
+  Cell:
+    type: object
+    properties:
+      x:
+        type: integer
+      y:
+        type: integer
+      z:
+        type: integer
+      type:
+        type: integer
