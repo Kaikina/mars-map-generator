@@ -29,7 +29,7 @@ function addDunes(width, height, dunesLevel, map, depth) {
         let placed = 0;
         do {
             let rndCell = getRandomIntInclusive(0, wTimesH);
-            let rndHeight = depth;
+            let rndHeight = getRandomIntInclusive(3, depth);
             if (map[0][rndCell] < 9 && map[0][rndCell] > 12 || map[0][rndCell] < 13) {
                 let centerPos = rndCell;
                 rndCell = rndCell - Math.trunc((rndHeight * 2 - 1) / 2) - width *
@@ -78,17 +78,17 @@ function addHoles(width, height, holesLevel, map) {
     }
 }
 
-router.get('/', async (req, res) => {
+router.post('/', async (req, res) => {
 
     //Construction de la map
     const {width: width, height: height, maxDepth: maxDepth, seaLevel: seaLevel, dunesLevel: dunesLevel,
         holesLevel: holesLevel} = req.body;
     if (!height || !width) {
         return res.status(400).send({
-            message: "Le body ne contient pas les paramètres requis."
+            message: "Le body ne contient pas les paramètres requis. " + JSON.stringify(req.body)
         });
     }
-    let depth = maxDepth ? maxDepth : 4;
+    let depth = maxDepth ? maxDepth : 2;
     let map = [];
     for (let i = 0; i < depth; i++) {
         let layer = [];

@@ -11,7 +11,7 @@ const server = request(createServer());
 describe.only('Maps api', function() {
     describe('Obtenir une map', function() {
         it("La requête fournit tous les paramètres, et on reçoit la map créée", async () => {
-            const {body: map} = await server.get('/api/v1/maps')
+            const {body: map} = await server.post('/api/v1/maps')
                 .set('Accept', 'application/json')
                 .send({
                     height: 50,
@@ -19,7 +19,6 @@ describe.only('Maps api', function() {
                 })
                 .expect(200);
             expect(map).to.be.an('array');
-            console.log(map);
         });
     });
 });

@@ -14,20 +14,48 @@ securityDefinitions:
     in: header
 paths:
   /maps:
-    get:
+    post:
       tags:
         - Maps
       summary: Return a randomly generated isometric map
       parameters:
         - in: body
-          name: Map dimension
-          type: object
-          required: true
-          properties:
-            heigth:
-              type: integer
-            width:
-              type: integer
+          name: map
+          description: The properties of the map.
+          schema:
+            type: object
+            required:
+              - height
+              - width
+            properties:
+              height:
+                type: integer
+                example: 500
+                description: Height of the map.
+              width:
+                type: integer
+                example: 500
+                description: Width of the map.
+              maxDepth:
+                type: integer
+                example: 5
+                description: Maximum number of layers.
+                default: 2
+              seaLevel:
+                type: number
+                example: 0.03
+                default: 0.03
+                description: \% of ice on the map.
+              duneslevel:
+                type: number
+                example: 0.01
+                default: 0.01
+                description: \% of mountains on the map.
+              holesLevel:
+                type: number
+                example: 0.01
+                default: 0.01
+                description: \% of holes on the map.
       responses:
         200:
           description: Return a randomly generated isometric map
@@ -35,23 +63,8 @@ paths:
           description: The required properties are not sent correctly
 definitions:
   Map:
-    type: object
-    properties:
-      cells:
-        type: array
-        items:
-          type: object
-          properties:
-            cell:
-              $ref: '#/definitions/Cell'
-  Cell:
-    type: object
-    properties:
-      x:
-        type: integer
-      y:
-        type: integer
-      z:
-        type: integer
-      type:
+    type: array
+    items:
+      type: array
+      items:
         type: integer
