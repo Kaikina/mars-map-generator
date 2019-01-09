@@ -135,10 +135,9 @@ router.post('/', async (req, res) => {
         if(err) {
             return console.log(err);
         }
-
         console.log("The file was saved!");
     });
-    return res.status(200).send(map);
+    return res.status(200).send(JSON.stringify(map));
 });
 
 module.exports = router;
