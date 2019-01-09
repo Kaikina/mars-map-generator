@@ -14,11 +14,12 @@ describe.only('Maps api', function() {
             const {body: map} = await server.post('/api/v1/maps')
                 .set('Accept', 'application/json')
                 .send({
-                    height: 50,
-                    width: 50
+                    height: 500,
+                    width: 500,
+                    maxDepth: 10
                 })
                 .expect(200);
-            expect(map).to.be.an('array');
+            //expect(map).to.be.an('array');
         });
     });
 });

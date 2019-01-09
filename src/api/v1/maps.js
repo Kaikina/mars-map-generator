@@ -46,7 +46,8 @@ function addDunes(width, height, dunesLevel, map, depth) {
                                     if (prob <= 3)
                                         map[l][rndCell + column] = getRandomIntInclusive(5, 8);
                                     else
-                                        map[l][rndCell + column] = getRandomIntInclusive(1, 4)
+                                        map[l][rndCell + column] = getRandomIntInclusive(1, 4);
+                                    placed++;
                                 }
                             }
                         }
@@ -55,9 +56,7 @@ function addDunes(width, height, dunesLevel, map, depth) {
                     rndHeight--;
                     rndCell = centerPos - Math.trunc((rndHeight * 2 - 1) / 2) - width *
                         Math.trunc((rndHeight * 2 - 1) / 2);
-                    console.log('layer ' + l + ': ' + map[l]);
                 }
-                placed++;
             }
         } while (!placed);
         i += placed;
@@ -129,7 +128,6 @@ router.post('/', async (req, res) => {
 
     console.log('mountains added.');
 
-    console.log(JSON.stringify(map));
     const fs = require('fs');
     fs.writeFile("/tmp/map.txt", JSON.stringify(map), function(err) {
         if(err) {
