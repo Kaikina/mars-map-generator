@@ -1,4 +1,4 @@
-#Rover map generator
+# Rover map generator
 
 1. Access the api documentation
 
@@ -6,7 +6,7 @@ You can consult the API documentation [here](https://mars-map-generator.herokuap
 You can click on `Try it out` and play with the values before clicking `Execute`.
 This will output you the map in the Response body.
 
-#Understanding the map output
+# Understanding the map output
 
 The map output is a matrix view of the field. Each array inside the matrix represents a layer cut of the map.
 Each number greater than 0 represents a tile (lava, sand, ice, black hole, gravel, ...). The 0 value represents the air.
