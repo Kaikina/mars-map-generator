@@ -7,7 +7,6 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const createSwaggerUiMiddleware = require('@coorpacademy/swagger-ui-express');
-const database = require('./src/database');
 
 const mapsRouter = require('./src/api/v1/maps');
 
@@ -25,12 +24,6 @@ const createServer = () => {
 	app.use(express.static(path.join(__dirname, 'src/public')));
 	app.use(bodyParser.json());
 	app.use(bodyParser.urlencoded({ extended: false }));
-
-	// Custom middleware to center the database model
-	app.use(function(req, res, next) {
-		req.db = database;
-		next();	// On any middleware, next should be called to avoid the timeout error and go to the next middleware!
-	});
 
 	app.use('/api/v1/maps', mapsRouter);
 
