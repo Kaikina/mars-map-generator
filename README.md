@@ -1,49 +1,14 @@
-EXPRESS SWAGGER TEMPLATE
+#Rover map generator
 
-#Install
+1. Access the api documentation
 
-1. Requirements
+You can consult the API documentation [here](https://mars-map-generator.herokuapp.com/explorer/#/Maps/post_maps).
+You can click on `Try it out` and play with the values before clicking `Execute`.
+This will output you the map in the Response body.
 
-Please verify that you have a node v8 version. If you're using nvm, just make
+#Understanding the map output
 
-```
-nvm use
-```
-
-2. Install dependencies 
-
-```
-npm init
-```
-
-#Development
-
-To develop in local environment, please use the command
-
-```
-npm run start:dev
-```
-
-This command uses nodemon and will watch your files to restart the server if any modification is made.
-
-#Important links
-
-[Swagger documentation](https://swagger.io/docs/specification/2-0/basic-structure/)
-
-[Express](http://expressjs.com/fr/4x/api.html)
-
-[Unit test with mocha](https://mochajs.org/#getting-started)
-
-[Assertion with expect of chai](https://www.chaijs.com/api/bdd/)
-
-[Querying a BDD with Sequelize](https://sequelize.readthedocs.io/en/v3/docs/querying/)
-
-[Mapping tables with Sequelize](https://sequelize.readthedocs.io/en/v3/docs/models-definition/)
-
-[Make database operation with Sequelize](https://sequelize.readthedocs.io/en/v3/docs/models-usage/)
-
-[JWT docs](https://jwt.io/)
-
-[JWT npm library](https://www.npmjs.com/package/jsonwebtoken)
-
-[Templating EJS](https://ejs.co/)
+The map output is a matrix view of the field. Each array inside the matrix represents a layer cut of the map.
+Each number greater than 0 represents a tile (lava, sand, ice, black hole, gravel, ...). The 0 value represents the air.
+Consequently, there's no 0 value in the first array, as it's plain ground. The 0 value (air) starts to appear in the second array.
+Understand that greater is the array index, greater chances you have to encounter 0 values inside it. 
