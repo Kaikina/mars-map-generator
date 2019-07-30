@@ -9,9 +9,6 @@ const logger = require('morgan');
 const createSwaggerUiMiddleware = require('@coorpacademy/swagger-ui-express');
 const database = require('./src/database');
 
-// TODO: require here your routes files
-// const usersRouter = require('./src/api/v1/users');
-// const flightsRouter = require('./src/api/v1/flights');
 const mapsRouter = require('./src/api/v1/maps');
 
 const createServer = () => {
@@ -35,9 +32,6 @@ const createServer = () => {
 		next();	// On any middleware, next should be called to avoid the timeout error and go to the next middleware!
 	});
 
-	// TODO: define here your endpoints and attach them to the routes
-	// app.use('/api/v1/users', usersRouter);
-	// app.use('/api/v1/flights', flightsRouter);
 	app.use('/api/v1/maps', mapsRouter);
 
 	const spec = fs.readFileSync(path.resolve(__dirname, 'swagger.yaml'), 'utf8');
@@ -49,10 +43,6 @@ const createServer = () => {
 			swaggerUi: '/explorer'
 		})
 	);
-
-	// BONUS: Si vous souhaitez ajouter la gestion de l'authentification
-	// vous pouvez decommenter ce ligne et implementer le code nécessaire
-	//app.use(auth());
 
 // catch 404 and forward to error handler
 	app.use(function(req, res, next) {

@@ -1,13 +1,19 @@
 const express = require('express');
 const router = express.Router();
 
-// Get random int, min included max included
+// Gets random int, min included max included
 function getRandomIntInclusive(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min +1)) + min;
 }
 
+/*  Adds ice on the map.
+    @width width of the map.
+    @height height of the map.
+    @seaLevel the rate of ice.
+    @map the map.
+ */
 function addIce(width, height, seaLevel, map) {
     let wTimesH = width * height;
     for (let i = 0; i < wTimesH * seaLevel; i++) {
@@ -22,6 +28,14 @@ function addIce(width, height, seaLevel, map) {
     }
 }
 
+/*
+    Adds dunes on the map.
+    @width width of the map.
+    @height height of the map.
+    @dunesLevel the rate of dunes.
+    @map the map.
+    @depth the Z max height of the dunes.
+ */
 function addDunes(width, height, dunesLevel, map, depth) {
     let wTimesH = width * height;
     for (let i = 0; i < wTimesH * dunesLevel; i++) {
@@ -62,6 +76,13 @@ function addDunes(width, height, dunesLevel, map, depth) {
     }
 }
 
+/*
+    Adds black holes on the map.
+    @width width of the map.
+    height height of the map.
+    @holesLevel the rate of black holes.
+    @map the map.
+ */
 function addHoles(width, height, holesLevel, map) {
     let wTimesH = width * height;
     for (let i = 0; i < wTimesH * holesLevel; i++) {
@@ -76,9 +97,10 @@ function addHoles(width, height, holesLevel, map) {
     }
 }
 
+// Generates the map
 router.post('/', async (req, res) => {
     req.setTimeout(500000);
-    //Construction de la map
+    //Map construction
     const {width: width, height: height, maxDepth: maxDepth, seaLevel: seaLevel, dunesLevel: dunesLevel,
         holesLevel: holesLevel} = req.body;
     if (!height || !width) {
@@ -104,7 +126,7 @@ router.post('/', async (req, res) => {
         map.push(layer);
     }
 
-    // Ajout de la glace sur la map
+    // Adds ice on the map
     if (seaLevel)
         addIce(width, height, seaLevel, map);
     else
@@ -125,7 +147,7 @@ router.post('/', async (req, res) => {
         else
             addDunes(width, height, 0.01, map, depth);
 
-    console.log('mountains added.');
+    console.log('dunes added.');
 
     const fs = require('fs');
     fs.writeFile("/tmp/map.txt", JSON.stringify(map), function(err) {
